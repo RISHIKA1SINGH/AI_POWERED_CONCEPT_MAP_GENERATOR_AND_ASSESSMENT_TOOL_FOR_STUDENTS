@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMap+ | Complete CS Learning Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.0.2/dist/tesseract.min.js"></script>
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo" onclick="app.navigateToSection('home')">
+                <i class="fas fa-graduation-cap"></i>
+                <span>EduMap+</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active" data-section="home">Home</a>
+                <a href="#subjects" class="nav-link" data-section="subjects">Subjects</a>
+                <a href="#dashboard" class="nav-link" data-section="dashboard">Dashboard</a>
+                <a href="#summary-generator" class="nav-link" data-section="summary-generator">Summary Generator</a>
+
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Master Computer Science with <span class="gradient-text">7 Core Subjects</span></h1>
+                <p class="hero-description">Complete learning platform with flashcards and quizzes covering Data Structures, Machine Learning, Operating Systems, Networks, Databases, AI, and Cloud Computing.</p>
+                <div class="hero-actions">
+                    <button class="btn btn--primary btn--lg" data-section="subjects">Explore All Subjects</button>
+                    <button class="btn btn--outline btn--lg" data-section="dashboard">View Progress</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="subjects-preview">
+                    <div class="preview-subject" style="--delay: 0s; --color: #4F46E5;">DSA</div>
+                    <div class="preview-subject" style="--delay: 0.5s; --color: #059669;">ML</div>
+                    <div class="preview-subject" style="--delay: 1s; --color: #DC2626;">OS</div>
+                    <div class="preview-subject" style="--delay: 1.5s; --color: #7C3AED;">CN</div>
+                    <div class="preview-subject" style="--delay: 2s; --color: #059669;">DB</div>
+                    <div class="preview-subject" style="--delay: 2.5s; --color: #F59E0B;">AI</div>
+                    <div class="preview-subject" style="--delay: 3s; --color: #06B6D4;">Cloud</div>
+                </div>
+            </div>
+        </div>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>20+ Flashcards per Subject</h3>
+                <p>Comprehensive study cards covering all important concepts with detailed explanations</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>10-Question Quizzes</h3>
+                <p>Balanced difficulty quizzes with immediate feedback and detailed explanations</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>Progress Tracking</h3>
+                <p>Monitor your learning progress across all 7 computer science subjects</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section id="subjects" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>7 Core Computer Science Subjects</h2>
+                <p>Master fundamental and advanced topics with interactive flashcards and comprehensive quizzes</p>
+            </div>
+            <div class="subjects-grid" id="subjectsGrid">
+                <!-- Subjects will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Subject Detail Section -->
+    <section id="subject-detail" class="section">
+        <div class="container">
+            <div class="subject-header">
+                <button class="btn btn--outline back-btn" data-section="subjects">
+                    <i class="fas fa-arrow-left"></i> Back to Subjects
+                </button>
+                <div class="subject-info">
+                    <h2 id="subjectTitle">Subject Name</h2>
+                    <p id="subjectDescription">Subject description</p>
+                </div>
+            </div>
+            <div class="subject-options">
+                <div class="option-card" id="flashcardsOption">
+                    <div class="option-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Flashcards</h3>
+                    <p>Study comprehensive concepts with detailed explanations</p>
+                    <button class="btn btn--primary">Start Studying</button>
+                </div>
+                <div class="option-card" id="conceptMapOption">
+    <div class="option-icon">
+        <i class="fas fa-diagram-project"></i>
+    </div>
+    <h3>Concept Map</h3>
+    <p>Visualize key concepts and relationships for this subject</p>
+    <button class="btn btn--primary">Generate Map</button>
+</div>
+
+                <div class="option-card" id="quizOption">
+                    <div class="option-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Quiz</h3>
+                    <p>Test your knowledge with 10 carefully crafted questions</p>
+                    <button class="btn btn--primary">Take Quiz</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flashcards Section -->
+    <section id="flashcards" class="section">
+        <div class="container">
+            <div class="section-header">
+                <button class="btn btn--outline back-btn" id="backToSubjectFromCards">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h2 id="flashcardsTitle">Flashcards</h2>
+                <div class="card-counter">
+                    <span id="cardCounter">Card 1 of 20</span>
+                </div>
+            </div>
+            <div class="flashcard-container">
+                <div class="flashcard" id="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="card-content">
+                                <div class="card-category" id="cardCategory">Subject</div>
+                                <h3 id="cardFront">Select a subject to start studying</h3>
+                            </div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="card-content">
+                                <div class="card-category" id="cardCategoryBack">Subject</div>
+                                <p id="cardBack">Answer will appear here</p>
+                                <div class="card-difficulty" id="cardDifficulty">Medium</div>
+                                <div class="card-explanation" id="cardExplanation">Detailed explanation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard-actions">
+                    <button class="btn btn--secondary" id="prevCardBtn" disabled>
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <button class="btn btn--outline" id="flipCardBtn" disabled>
+                        <i class="fas fa-sync-alt"></i> Flip Card
+                    </button>
+                    <button class="btn btn--secondary" id="nextCardBtn" disabled>
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Concept Map Section -->
+<!-- Concept Map Section -->
+<section id="concept-map" class="section">
+  <div class="container">
+    <div class="conceptmap-header">
+      <button class="btn btn--outline back-btn" id="backToSubjectFromConceptMap">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+      <h2 id="conceptMapTitle">Concept Map</h2>
+      <p>Explore the hierarchical relationship between key concepts</p>
+    </div>
+    <div class="conceptmap-container" id="conceptMapContainer">
+      <!-- Dynamic concept map will be generated here -->
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="section">
+        <div class="container">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <button class="btn btn--outline back-btn" id="backToSubjectFromQuiz">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <h2 id="quizTitle">Quiz</h2>
+                    <div class="quiz-info">
+                        <div class="quiz-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <span class="progress-text" id="progressText">Question 1 of 10</span>
+                        </div>
+                        <div class="quiz-timer" id="quizTimer">10:00</div>
+                    </div>
+                </div>
+                <div class="quiz-content" id="quizContent">
+                    <div class="quiz-start-screen">
+                        <i class="fas fa-clipboard-question"></i>
+                        <h3>Ready to Test Your Knowledge?</h3>
+                        <p>This quiz contains 10 questions with balanced difficulty levels</p>
+                        <p>You have 10 minutes to complete the quiz</p>
+                        <button class="btn btn--primary btn--lg" id="startQuizBtn">Start Quiz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- ✅ Review Quiz Section -->
+<section id="review-quiz" class="section">
+  <div class="container">
+    <div class="reviewquiz-header">
+      <button class="btn btn--outline back-btn" id="backToResultFromReview">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+      <h2>Quiz Review</h2>
+      <p>Analyze your incorrect answers and learn from explanations</p>
+    </div>
+
+    <div class="reviewquiz-container" id="reviewQuizContainer">
+      <!-- Dynamically filled with incorrect questions -->
+    </div>
+  </div>
+</section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>Learning Dashboard</h2>
+                <p>Track your progress across all 7 computer science subjects</p>
+            </div>
+            <div class="dashboard-grid">
+                <div class="stats-overview">
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalSubjects">7</div>
+                        <div class="stat-label">Subjects Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalQuizzes"> 0</div>
+                        <div class="stat-label">Quizzes Taken</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalCards">0</div>
+                        <div class="stat-label">Cards Studied</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="avgScore">0%</div>
+                        <div class="stat-label">Avg Quiz Score</div>
+                    </div>
+                </div>
+                <div class="subject-progress">
+                    <h3>Subject Progress</h3>
+                    <div class="progress-list" id="subjectProgressList">
+                        <!-- Progress items will be dynamically generated -->
+                    </div>
+                </div>
+                <div class="achievements-card">
+                    <h3>Achievements</h3>
+                    <div class="achievements-list" id="achievementsList">
+                        <!-- Achievements will be dynamically generated -->
+                    </div>
+                </div>
+                <div class="recent-activity-card">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list" id="activityList">
+                        <div class="activity-item">
+                            <span>Welcome to EduMap+! 🎉</span>
+                            <span class="activity-time">Just now</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Summary Generator Section -->
+<!-- Summary Generator Section -->
+<section id="summary-generator" class="section">
+  <div class="container">
+    <div class="dashboard-header">
+      <h2>Summary Generator</h2>
+      <p>Upload your study materials (PDF, Text, or Images) and get concise notes for exam preparation.</p>
+    </div>
+
+    <div class="summary-upload">
+      <div class="upload-card">
+        <input type="file" id="fileInput" accept=".pdf,.txt,image/*" multiple>
+        <button class="btn btn--primary" id="generateSummaryBtn">
+          <i class="fas fa-magic"></i> Generate Summary Notes
+        </button>
+      </div>
+
+      <div id="fileList" class="file-list"></div>
+
+      <div id="summaryOutput" class="summary-output hidden">
+        <h3>📘 Generated Summary Notes</h3>
+        <div id="summaryContent" class="summary-content"></div>
+      </div>
+    </div>
+  </div>
+
+  
+</section>
+
+    <!-- Quiz Results Modal -->
+    <div class="modal hidden" id="resultsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Quiz Results</h3>
+                <button class="modal-close" id="closeResultsModal">&times;</button>
+            </div>
+            <div class="modal-body" id="resultsContent">
+                <!-- Results content will be dynamically generated -->
+                 <div class="quiz-actions" style="text-align:center; margin-top:20px;">
+  <button class="btn btn--primary" id="retakeQuizBtn">Retake Quiz</button>
+  <button class="btn btn--secondary" id="reviewQuizBtn">Review Quiz</button>
+</div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+   
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.0.2/dist/tesseract.min.js"></script>
+
+    <script src="app.js"></script>
+</body>
+</html>
